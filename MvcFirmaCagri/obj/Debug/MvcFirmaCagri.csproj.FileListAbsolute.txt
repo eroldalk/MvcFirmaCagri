@@ -77,3 +77,7 @@ C:\Users\Lenovo\Desktop\MvcFirmaCagri\MvcFirmaCagri\obj\Debug\MvcFirmaCagri.cspr
 C:\Users\Lenovo\Desktop\MvcFirmaCagri\MvcFirmaCagri\obj\Debug\MvcFirmaCagri.csproj.CopyComplete
 C:\Users\Lenovo\Desktop\MvcFirmaCagri\MvcFirmaCagri\obj\Debug\MvcFirmaCagri.dll
 C:\Users\Lenovo\Desktop\MvcFirmaCagri\MvcFirmaCagri\obj\Debug\MvcFirmaCagri.pdb
+C:\Users\Lenovo\Desktop\MvcFirmaCagri\MvcFirmaCagri\bin\EntityFramework.dll
+C:\Users\Lenovo\Desktop\MvcFirmaCagri\MvcFirmaCagri\bin\EntityFramework.SqlServer.dll
+C:\Users\Lenovo\Desktop\MvcFirmaCagri\MvcFirmaCagri\bin\EntityFramework.xml
+C:\Users\Lenovo\Desktop\MvcFirmaCagri\MvcFirmaCagri\bin\EntityFramework.SqlServer.xml

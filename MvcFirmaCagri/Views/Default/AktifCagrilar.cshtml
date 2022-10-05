@@ -1,4 +1,5 @@
-﻿
+﻿@using MvcFirmaCagri.Models.entity
+@model List<TBLCagrilar>
 @{
     ViewBag.Title = "AktifCagrilar";
     Layout = "~/Views/Shared/FirmaLayout.cshtml";
@@ -9,25 +10,18 @@
         <th>ID</th>
         <th>Konu</th>
         <th>Tarih</th>
+        <th>Düzenle</th>
+        <th>Detaylar</th>
     </tr>
-    <tr>
-        <td>1</td>
-        <td>Raporlama</td>
-        <td>19 Tem 2021</td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>Raporlama</td>
-        <td>19 Tem 2021</td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>Raporlama</td>
-        <td>19 Tem 2021</td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>Raporlama</td>
-        <td>19 Tem 2021</td>
-    </tr>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>@x.ID</td>
+            <td>@x.Konu</td>
+            <td>@x.Tarih</td>
+            <td><a href="#" class="btn btn-success">Düzenle</a></td>
+            <td><a href="#" class="btn btn-info">Düzenle</a></td>
+        </tr>
+    }
 </table>
+<td><a href="/Default/YeniCagri/" class="btn btn-primary">Yeni Çağrı Ekleme</a></td>

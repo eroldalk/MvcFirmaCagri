@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DbisTakipModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="TBLAdmin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Kullanici" Type="nvarchar" MaxLength="10" />
+    <Property Name="Sifre" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="TBLCagrilar">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CagriFirma" Type="int" />
+    <Property Name="Konu" Type="nvarchar" MaxLength="50" />
+    <Property Name="Aciklama" Type="nvarchar(max)" />
+    <Property Name="Durum" Type="bit" />
+    <Property Name="Tarih" Type="date" />
+  </EntityType>
+  <EntityType Name="TBLdepartmanlar">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ad" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="TBLFirmalar">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ad" Type="nvarchar" MaxLength="30" />
+    <Property Name="Yetkili" Type="nvarchar" MaxLength="30" />
+    <Property Name="Telefon" Type="nvarchar" MaxLength="20" />
+    <Property Name="Mail" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sektor" Type="nvarchar" MaxLength="30" />
+    <Property Name="il" Type="nvarchar" MaxLength="20" />
+    <Property Name="ilce" Type="nvarchar" MaxLength="30" />
+    <Property Name="Adres" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="TBLGorevDetaylar">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Gorev" Type="int" />
+    <Property Name="Aciklama" Type="nvarchar" MaxLength="200" />
+    <Property Name="Tarih" Type="date" />
+    <Property Name="Saat" Type="char" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="TBLGorevler">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Gorev/Veren" Type="int" />
+    <Property Name="GorevAlan" Type="int" />
+    <Property Name="Aciklama" Type="nvarchar" MaxLength="500" />
+    <Property Name="Durum" Type="bit" />
+    <Property Name="Tarih" Type="date" />
+  </EntityType>
+  <EntityType Name="TBLPersonel">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ad" Type="nvarchar" MaxLength="30" />
+    <Property Name="Soyad" Type="nvarchar" MaxLength="30" />
+    <Property Name="Mail" Type="nvarchar" MaxLength="50" />
+    <Property Name="Telefon" Type="nvarchar" MaxLength="20" />
+    <Property Name="Gorsel" Type="nvarchar" MaxLength="100" />
+    <Property Name="Departman" Type="int" />
+    <Property Name="Durum" Type="bit" />
+  </EntityType>
+  <Association Name="FK_TBLCagrilar_TBLFirmalar">
+    <End Role="TBLFirmalar" Type="Self.TBLFirmalar" Multiplicity="0..1" />
+    <End Role="TBLCagrilar" Type="Self.TBLCagrilar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLFirmalar">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBLCagrilar">
+        <PropertyRef Name="CagriFirma" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBLGorevDetaylar_TBLGorevler">
+    <End Role="TBLGorevler" Type="Self.TBLGorevler" Multiplicity="0..1" />
+    <End Role="TBLGorevDetaylar" Type="Self.TBLGorevDetaylar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLGorevler">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBLGorevDetaylar">
+        <PropertyRef Name="Gorev" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBLGorevler_TBLPersonel">
+    <End Role="TBLPersonel" Type="Self.TBLPersonel" Multiplicity="0..1" />
+    <End Role="TBLGorevler" Type="Self.TBLGorevler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLPersonel">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBLGorevler">
+        <PropertyRef Name="Gorev/Veren" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBLGorevler_TBLPersonel1">
+    <End Role="TBLPersonel" Type="Self.TBLPersonel" Multiplicity="0..1" />
+    <End Role="TBLGorevler" Type="Self.TBLGorevler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLPersonel">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBLGorevler">
+        <PropertyRef Name="GorevAlan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBLPersonel_TBLdepartmanlar">
+    <End Role="TBLdepartmanlar" Type="Self.TBLdepartmanlar" Multiplicity="0..1" />
+    <End Role="TBLPersonel" Type="Self.TBLPersonel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLdepartmanlar">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBLPersonel">
+        <PropertyRef Name="Departman" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DbisTakipModelStoreContainer">
+    <EntitySet Name="TBLAdmin" EntityType="Self.TBLAdmin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBLCagrilar" EntityType="Self.TBLCagrilar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBLdepartmanlar" EntityType="Self.TBLdepartmanlar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBLFirmalar" EntityType="Self.TBLFirmalar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBLGorevDetaylar" EntityType="Self.TBLGorevDetaylar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBLGorevler" EntityType="Self.TBLGorevler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBLPersonel" EntityType="Self.TBLPersonel" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_TBLCagrilar_TBLFirmalar" Association="Self.FK_TBLCagrilar_TBLFirmalar">
+      <End Role="TBLFirmalar" EntitySet="TBLFirmalar" />
+      <End Role="TBLCagrilar" EntitySet="TBLCagrilar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBLGorevDetaylar_TBLGorevler" Association="Self.FK_TBLGorevDetaylar_TBLGorevler">
+      <End Role="TBLGorevler" EntitySet="TBLGorevler" />
+      <End Role="TBLGorevDetaylar" EntitySet="TBLGorevDetaylar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBLGorevler_TBLPersonel" Association="Self.FK_TBLGorevler_TBLPersonel">
+      <End Role="TBLPersonel" EntitySet="TBLPersonel" />
+      <End Role="TBLGorevler" EntitySet="TBLGorevler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBLGorevler_TBLPersonel1" Association="Self.FK_TBLGorevler_TBLPersonel1">
+      <End Role="TBLPersonel" EntitySet="TBLPersonel" />
+      <End Role="TBLGorevler" EntitySet="TBLGorevler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBLPersonel_TBLdepartmanlar" Association="Self.FK_TBLPersonel_TBLdepartmanlar">
+      <End Role="TBLdepartmanlar" EntitySet="TBLdepartmanlar" />
+      <End Role="TBLPersonel" EntitySet="TBLPersonel" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
