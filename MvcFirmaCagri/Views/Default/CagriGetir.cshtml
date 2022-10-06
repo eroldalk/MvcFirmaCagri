@@ -8,6 +8,7 @@
 <br />
 @using (Html.BeginForm("Cagriduzenle", "Default", FormMethod.Post))
 {
+    @Html.HiddenFor(x => x.ID)
     @Html.Label("Konu")
     @Html.TextBoxFor(x => x.Konu, new { @class = "form-control " })
     <br />

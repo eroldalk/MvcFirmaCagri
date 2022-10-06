@@ -53,6 +53,13 @@ namespace MvcFirmaCagri.Controllers
             var cagri = db.TBLCagrilar.Find(id);
             return View("CagriGetir", cagri);
         }
-
+        public ActionResult CagriDuzenle(TBLCagrilar p)
+        {
+            var cagri = db.TBLCagrilar.Find(p.ID);
+            cagri.Konu= p.Konu;
+            cagri.Aciklama = p.Aciklama;
+            db.SaveChanges();
+            return RedirectToAction("AktifCagrilar");
+        }
     }
 }
