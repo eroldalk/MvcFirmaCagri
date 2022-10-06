@@ -25,7 +25,7 @@ namespace MvcFirmaCagri.Controllers
         public ActionResult AktifCagrilar()
         {
             var mail = (string)Session["Mail"];
-            var id=db.TBLFirmalar.Where(x=>x.Mail == mail).Select(y=>y.ID).ToList().FirstOrDefault();    
+            var id=db.TBLFirmalar.Where(x=>x.Mail == mail).Select(y=>y.ID).FirstOrDefault();    
             var cagrilar = db.TBLCagrilar.Where(x=>x.Durum==true &&
             x.CagriFirma == id).ToList();
             return View(cagrilar);
@@ -80,7 +80,7 @@ namespace MvcFirmaCagri.Controllers
             var mail = (string)Session["Mail"];
             var id = db.TBLFirmalar.Where(x => x.Mail == mail).Select(y => y.ID).FirstOrDefault();
 
-            var profil = db.TBLFirmalar.Where(x=>x.ID == id).ToList().FirstOrDefault();
+            var profil = db.TBLFirmalar.Where(x => x.ID == id).ToList().FirstOrDefault();
             return View(profil);
         }
     }
