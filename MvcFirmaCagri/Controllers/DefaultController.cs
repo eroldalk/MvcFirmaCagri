@@ -15,6 +15,9 @@ namespace MvcFirmaCagri.Controllers
             return View();
         }
         DbisTakipEntities db = new DbisTakipEntities();
+
+        [Authorize]
+
         public ActionResult AktifCagrilar()
         {
             var cagrilar = db.TBLCagrilar.Where(x=>x.Durum==true &&
