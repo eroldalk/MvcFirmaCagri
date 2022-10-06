@@ -4,14 +4,15 @@
     Layout = "~/Views/Shared/FirmaLayout.cshtml";
 }
 
-<h2>Yeni Çağrı Ekeleme Sayfası</h2>
+<h2>Yeni Çağrı Eklem  ayfası</h2>
 <br/>
 
 
 
-    <form method="post">
+    <form method="post" >
         @Html.Label("Konu")
-        @Html.TextBoxFor(x => x.Konu, new { @class = "form-control " })
+        @Html.TextBoxFor(x => x.Konu, new { @class = "form-control" })
+
         <br />
         <br />
         @Html.Label("Açıklama")

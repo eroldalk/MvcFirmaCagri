@@ -1,0 +1,23 @@
+﻿@model MvcFirmaCagri.Models.entity.TBLCagrilar
+@{
+    ViewBag.Title = "CagriGetir";
+    Layout = "~/Views/Shared/FirmaLayout.cshtml";
+}
+
+<h2>Çağrı Düzenleme Sayfası</h2>
+<br />
+@using (Html.BeginForm("Cagriduzenle", "Default", FormMethod.Post))
+{
+    @Html.Label("Konu")
+    @Html.TextBoxFor(x => x.Konu, new { @class = "form-control " })
+    <br />
+    <br />
+    @Html.Label("Açıklama")
+    @Html.TextAreaFor(x => x.Aciklama, 10, 4, new { @class = "form-control" })
+    <br />
+    <br />
+    <br />
+
+    <button class="btn btn-primary">Değişiklikleri Kaydet</button>
+
+}

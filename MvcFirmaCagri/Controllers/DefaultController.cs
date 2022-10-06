@@ -42,6 +42,17 @@ namespace MvcFirmaCagri.Controllers
           db.SaveChanges();
           return RedirectToAction("AktifCagrilar");
         }
+        public ActionResult CagriDetay(int id)
+        {
+            var cagri = db.TBLCagriDetay.Where(x => x.Cagri == id).ToList();
+            return View(cagri);
+        }
+
+        public ActionResult CagriGetir(int id)
+        {
+            var cagri = db.TBLCagrilar.Find(id);
+            return View("CagriGetir", cagri);
+        }
 
     }
 }

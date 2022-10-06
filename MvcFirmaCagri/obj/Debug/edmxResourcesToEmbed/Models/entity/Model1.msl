@@ -82,5 +82,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TBLCagriDetay">
+      <EntityTypeMapping TypeName="DbisTakipModel.TBLCagriDetay">
+        <MappingFragment StoreEntitySet="TBLCagriDetay">
+          <ScalarProperty Name="Saat" ColumnName="Saat" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+          <ScalarProperty Name="Cagri" ColumnName="Cagri" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

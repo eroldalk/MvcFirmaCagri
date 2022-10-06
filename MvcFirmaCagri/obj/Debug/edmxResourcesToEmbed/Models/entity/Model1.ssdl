@@ -5,8 +5,18 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Kullanici" Type="nvarchar" MaxLength="10" />
-    <Property Name="Sifre" Type="nvarchar" MaxLength="10" />
+    <Property Name="Kullanici" Type="nvarchar" MaxLength="20" />
+    <Property Name="Sifre" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="TBLCagriDetay">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cagri" Type="int" />
+    <Property Name="Aciklama" Type="nvarchar" MaxLength="250" />
+    <Property Name="Tarih" Type="date" />
+    <Property Name="Saat" Type="char" MaxLength="5" />
   </EntityType>
   <EntityType Name="TBLCagrilar">
     <Key>
@@ -74,6 +84,18 @@
     <Property Name="Departman" Type="int" />
     <Property Name="Durum" Type="bit" />
   </EntityType>
+  <Association Name="FK_TBLCagriDetay_TBLCagrilar">
+    <End Role="TBLCagrilar" Type="Self.TBLCagrilar" Multiplicity="0..1" />
+    <End Role="TBLCagriDetay" Type="Self.TBLCagriDetay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLCagrilar">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBLCagriDetay">
+        <PropertyRef Name="Cagri" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TBLCagrilar_TBLFirmalar">
     <End Role="TBLFirmalar" Type="Self.TBLFirmalar" Multiplicity="0..1" />
     <End Role="TBLCagrilar" Type="Self.TBLCagrilar" Multiplicity="*" />
@@ -136,12 +158,17 @@
   </Association>
   <EntityContainer Name="DbisTakipModelStoreContainer">
     <EntitySet Name="TBLAdmin" EntityType="Self.TBLAdmin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBLCagriDetay" EntityType="Self.TBLCagriDetay" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBLCagrilar" EntityType="Self.TBLCagrilar" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBLdepartmanlar" EntityType="Self.TBLdepartmanlar" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBLFirmalar" EntityType="Self.TBLFirmalar" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBLGorevDetaylar" EntityType="Self.TBLGorevDetaylar" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBLGorevler" EntityType="Self.TBLGorevler" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBLPersonel" EntityType="Self.TBLPersonel" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_TBLCagriDetay_TBLCagrilar" Association="Self.FK_TBLCagriDetay_TBLCagrilar">
+      <End Role="TBLCagrilar" EntitySet="TBLCagrilar" />
+      <End Role="TBLCagriDetay" EntitySet="TBLCagriDetay" />
+    </AssociationSet>
     <AssociationSet Name="FK_TBLCagrilar_TBLFirmalar" Association="Self.FK_TBLCagrilar_TBLFirmalar">
       <End Role="TBLFirmalar" EntitySet="TBLFirmalar" />
       <End Role="TBLCagrilar" EntitySet="TBLCagrilar" />
