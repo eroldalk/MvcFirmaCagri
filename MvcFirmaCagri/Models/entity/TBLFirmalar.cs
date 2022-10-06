@@ -29,6 +29,7 @@ namespace MvcFirmaCagri.Models.entity
         public string il { get; set; }
         public string ilce { get; set; }
         public string Adres { get; set; }
+        public string Sifre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBLCagrilar> TBLCagrilar { get; set; }

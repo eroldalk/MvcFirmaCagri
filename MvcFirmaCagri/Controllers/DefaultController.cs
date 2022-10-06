@@ -6,7 +6,11 @@ using System.Web.Mvc;
 using MvcFirmaCagri.Models.entity;
 
 namespace MvcFirmaCagri.Controllers
-{
+{ 
+    
+    [Authorize]
+
+
     public class DefaultController : Controller
     {
         // GET: Default
@@ -16,18 +20,22 @@ namespace MvcFirmaCagri.Controllers
         }
         DbisTakipEntities db = new DbisTakipEntities();
 
-        [Authorize]
+       
 
         public ActionResult AktifCagrilar()
         {
+            var mail = (string)Session["Mail"];
+            var id=db.TBLFirmalar.Where(x=>x.Mail == mail).Select(y=>y.ID).ToList().FirstOrDefault();    
             var cagrilar = db.TBLCagrilar.Where(x=>x.Durum==true &&
-            x.CagriFirma == 12).ToList();
+            x.CagriFirma == id).ToList();
             return View(cagrilar);
         }
         public ActionResult PasifCagrilar()
         {
+            var mail = (string)Session["Mail"];
+            var id = db.TBLFirmalar.Where(x => x.Mail == mail).Select(y => y.ID).FirstOrDefault();
             var cagrilar = db.TBLCagrilar.Where(x => x.Durum == false &&
-            x.CagriFirma == 12).ToList();
+            x.CagriFirma == id).ToList();
             return View(cagrilar);
         }
         [HttpGet]
@@ -38,9 +46,12 @@ namespace MvcFirmaCagri.Controllers
         [HttpPost]
         public ActionResult YeniCagri(TBLCagrilar p)
         {
-            p.Durum = true;
-            p.Tarih= DateTime.Parse(DateTime.Now.ToShortDateString());
-            p.CagriFirma = 12;
+
+          var mail = (string)Session["Mail"];
+          var id = db.TBLFirmalar.Where(x => x.Mail == mail).Select(y => y.ID).FirstOrDefault();
+          p.Durum = true;
+          p.Tarih= DateTime.Parse(DateTime.Now.ToShortDateString());
+          p.CagriFirma = id;
           db.TBLCagrilar.Add(p);
           db.SaveChanges();
           return RedirectToAction("AktifCagrilar");
@@ -63,6 +74,14 @@ namespace MvcFirmaCagri.Controllers
             cagri.Aciklama = p.Aciklama;
             db.SaveChanges();
             return RedirectToAction("AktifCagrilar");
+        }
+        public ActionResult ProfilDuzenle()
+        {
+            var mail = (string)Session["Mail"];
+            var id = db.TBLFirmalar.Where(x => x.Mail == mail).Select(y => y.ID).FirstOrDefault();
+
+            var profil = db.TBLFirmalar.Where(x=>x.ID == id).ToList().FirstOrDefault();
+            return View(profil);
         }
     }
 }

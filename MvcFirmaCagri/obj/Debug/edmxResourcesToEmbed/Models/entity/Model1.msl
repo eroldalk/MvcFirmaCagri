@@ -33,6 +33,7 @@
     <EntitySetMapping Name="TBLFirmalar">
       <EntityTypeMapping TypeName="DbisTakipModel.TBLFirmalar">
         <MappingFragment StoreEntitySet="TBLFirmalar">
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Ad" ColumnName="Ad" />
           <ScalarProperty Name="Yetkili" ColumnName="Yetkili" />

@@ -43,6 +43,7 @@
     <Property Name="ilce" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="Adres" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="TBLCagrilar" Relationship="Self.FK_TBLCagrilar_TBLFirmalar" FromRole="TBLFirmalar" ToRole="TBLCagrilar" />
+    <Property Name="Sifre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="TBLGorevDetaylar">
     <Key>
