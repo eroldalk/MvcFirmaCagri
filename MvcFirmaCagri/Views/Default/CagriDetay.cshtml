@@ -5,10 +5,19 @@
     Layout = "~/Views/Shared/FirmaLayout.cshtml";
 }
 
-<h3>Çağrı Detayları</h3>
 
-    <br/>
-    <br/>
+
+<div class="main-content p-5">
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <h3>Çağrı Detayları</h3>
+    <br />
+    <br />
+    <br />
     <table class="table table-bordered">
         <tr>
             <th>#</th>
@@ -16,14 +25,16 @@
             <th>Tarih</th>
             <th>Saat</th>
         </tr>
-      
+
         @foreach (var x in Model)
-            {
-                <tr>
-                    <td>@x.ID</td>
-                    <td>@x.Aciklama</td>
-                    <td>@x.Tarih</td>
-                    <td>@x.Saat</td>
-                </tr>
-            }
+        {
+            <tr>
+                <td>@x.ID</td>
+                <td>@x.Aciklama</td>
+                <td>@x.Tarih</td>
+                <td>@x.Saat</td>
+            </tr>
+        }
     </table>
+
+</div>

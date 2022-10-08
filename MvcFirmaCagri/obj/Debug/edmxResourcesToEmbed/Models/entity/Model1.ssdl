@@ -72,6 +72,18 @@
     <Property Name="Durum" Type="bit" />
     <Property Name="Tarih" Type="date" />
   </EntityType>
+  <EntityType Name="TBLMesajlar">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Gonderen" Type="nvarchar" MaxLength="50" />
+    <Property Name="Alici" Type="nvarchar" MaxLength="50" />
+    <Property Name="Konu" Type="nvarchar" MaxLength="50" />
+    <Property Name="Mesaj" Type="nvarchar(max)" />
+    <Property Name="Tarih" Type="date" />
+    <Property Name="Durum" Type="bit" />
+  </EntityType>
   <EntityType Name="TBLPersonel">
     <Key>
       <PropertyRef Name="ID" />
@@ -165,6 +177,7 @@
     <EntitySet Name="TBLFirmalar" EntityType="Self.TBLFirmalar" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBLGorevDetaylar" EntityType="Self.TBLGorevDetaylar" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBLGorevler" EntityType="Self.TBLGorevler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBLMesajlar" EntityType="Self.TBLMesajlar" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBLPersonel" EntityType="Self.TBLPersonel" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_TBLCagriDetay_TBLCagrilar" Association="Self.FK_TBLCagriDetay_TBLCagrilar">
       <End Role="TBLCagrilar" EntitySet="TBLCagrilar" />

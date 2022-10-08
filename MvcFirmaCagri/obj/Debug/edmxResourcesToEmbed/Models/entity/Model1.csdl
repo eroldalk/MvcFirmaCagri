@@ -179,6 +179,7 @@
       <End Role="TBLCagrilar" EntitySet="TBLCagrilar" />
       <End Role="TBLCagriDetay" EntitySet="TBLCagriDetay" />
     </AssociationSet>
+    <EntitySet Name="TBLMesajlar" EntityType="DbisTakipModel.TBLMesajlar" />
   </EntityContainer>
   <EntityType Name="TBLCagriDetay">
     <Key>
@@ -203,4 +204,16 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="TBLMesajlar">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Gonderen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Alici" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Konu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mesaj" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Tarih" Type="DateTime" Precision="0" />
+    <Property Name="Durum" Type="Boolean" />
+  </EntityType>
 </Schema>

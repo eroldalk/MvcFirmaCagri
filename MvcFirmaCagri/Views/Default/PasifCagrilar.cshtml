@@ -5,21 +5,32 @@
     Layout = "~/Views/Shared/FirmaLayout.cshtml";
 }
 
-<table class="table table-bordered">
-    <tr>
-        <th>ID</th>
-        <th>Konu</th>
-        <th>Tarih</th>
-        <th>Detaylar</th>
-    </tr>
-    @foreach (var x in Model)
-    {
+
+
+<div class="main-content p-5">
+    <br />
+    <br />
+    <br />
+    <h1> Pasif Çağrıları</h1>
+    <br />
+    <br />
+    <table class="table table-bordered">
         <tr>
-            <td>@x.ID</td>
-            <td>@x.Konu</td>
-            <td>@x.Tarih</td>
-            <td><a href="/Default/CagriDetay/@x.ID/" class="btn btn-info">Detaylar</a></td>
+            <th>ID</th>
+            <th>Konu</th>
+            <th>Tarih</th>
+            <th>Detaylar</th>
         </tr>
-    }
-</table>
-<td><a href="/Default/YeniCagri/" class="btn btn-primary">Yeni Çağrı Ekleme</a></td>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <td>@x.ID</td>
+                <td>@x.Konu</td>
+                <td>@x.Tarih</td>
+                <td><a href="/Default/CagriDetay/@x.ID/" class="btn btn-info">Detaylar</a></td>
+            </tr>
+        }
+    </table>
+    <td><a href="/Default/YeniCagri/" class="btn btn-primary">Yeni Çağrı Ekleme</a></td>
+
+</div>

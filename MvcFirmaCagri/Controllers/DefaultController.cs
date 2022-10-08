@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using MvcFirmaCagri.Models.entity;
 
 namespace MvcFirmaCagri.Controllers
@@ -16,6 +17,18 @@ namespace MvcFirmaCagri.Controllers
         // GET: Default
         public ActionResult Index()
         {
+            var mail = (string)Session["Mail"];
+            var id = db.TBLFirmalar.Where(x => x.Mail == mail).Select(y => y.ID).FirstOrDefault();
+            var toplamcagri = db.TBLCagrilar.Where(x=>x.CagriFirma == id).Count();
+            var aktifcagri = db.TBLCagrilar.Where(x => x.CagriFirma == id && x.Durum == true).Count();
+            var pasifcagri = db.TBLCagrilar.Where(x => x.CagriFirma == id && x.Durum == false).Count();
+            var yetkili = db.TBLFirmalar.Where(x => x.ID == id).Select(y => y.Yetkili).FirstOrDefault();
+            var sektor = db.TBLFirmalar.Where(x => x.ID == id).Select(y => y.Sektor).FirstOrDefault();
+            ViewBag.c1 = toplamcagri;
+            ViewBag.c2 = aktifcagri;
+            ViewBag.c3 = pasifcagri;
+            ViewBag.c4 = yetkili;
+            ViewBag.c5 = sektor;
             return View();
         }
         DbisTakipEntities db = new DbisTakipEntities();
@@ -83,5 +96,43 @@ namespace MvcFirmaCagri.Controllers
             var profil = db.TBLFirmalar.Where(x => x.ID == id).ToList().FirstOrDefault();
             return View(profil);
         }
+
+        public PartialViewResult partial1()
+        {
+            var mail = (string)Session["Mail"];
+            var mesajlar = db.TBLMesajlar.Where(x => x.Alici == mail && x.Durum == true).ToList();
+            var mesajsayisi = db.TBLMesajlar.Where(x => x.Alici == mail && x.Durum == true).Count();
+            ViewBag.m1 = mesajsayisi;
+            return PartialView(mesajlar);
+        }
+
+        public PartialViewResult partial2()
+        {
+            var mail = (string)Session["Mail"];
+            var id = db.TBLFirmalar.Where(x => x.Mail == mail).Select(y=> y.ID).FirstOrDefault();
+            var cagrilar = db.TBLCagrilar.Where(x => x.CagriFirma == id && x.Durum == true).ToList();
+
+            var cagrisayisi = db.TBLCagrilar.Where(x => x.CagriFirma == id && x.Durum == true).Count();
+            ViewBag.a1 = cagrisayisi;
+
+            return PartialView(cagrilar);
+        }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            
+            return RedirectToAction("Index", "Login");
+        }
+
+
+
+
+
+
+
+
+
     }
 }
