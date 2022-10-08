@@ -18,6 +18,8 @@ namespace MvcFirmaCagri.Models.entity
         public TBLFirmalar()
         {
             this.TBLCagrilar = new HashSet<TBLCagrilar>();
+            this.TBLMesajlar = new HashSet<TBLMesajlar>();
+            this.TBLMesajlar1 = new HashSet<TBLMesajlar>();
         }
     
         public int ID { get; set; }
@@ -30,8 +32,13 @@ namespace MvcFirmaCagri.Models.entity
         public string ilce { get; set; }
         public string Adres { get; set; }
         public string Sifre { get; set; }
+        public string foto { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBLCagrilar> TBLCagrilar { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBLMesajlar> TBLMesajlar { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBLMesajlar> TBLMesajlar1 { get; set; }
     }
 }

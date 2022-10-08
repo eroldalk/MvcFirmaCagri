@@ -50,6 +50,7 @@
     <Property Name="il" Type="nvarchar" MaxLength="20" />
     <Property Name="ilce" Type="nvarchar" MaxLength="30" />
     <Property Name="Adres" Type="nvarchar" MaxLength="200" />
+    <Property Name="foto" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="TBLGorevDetaylar">
     <Key>
@@ -77,11 +78,11 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Gonderen" Type="nvarchar" MaxLength="50" />
-    <Property Name="Alici" Type="nvarchar" MaxLength="50" />
+    <Property Name="Gonderen" Type="int" />
+    <Property Name="Alici" Type="int" />
     <Property Name="Konu" Type="nvarchar" MaxLength="50" />
     <Property Name="Mesaj" Type="nvarchar(max)" />
-    <Property Name="Tarih" Type="date" />
+    <Property Name="Tarih" Type="date" Nullable="false" />
     <Property Name="Durum" Type="bit" />
   </EntityType>
   <EntityType Name="TBLPersonel">
@@ -157,6 +158,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TBLMesajlar_TBLFirmalar">
+    <End Role="TBLFirmalar" Type="Self.TBLFirmalar" Multiplicity="0..1" />
+    <End Role="TBLMesajlar" Type="Self.TBLMesajlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLFirmalar">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBLMesajlar">
+        <PropertyRef Name="Gonderen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBLMesajlar_TBLFirmalar1">
+    <End Role="TBLFirmalar" Type="Self.TBLFirmalar" Multiplicity="0..1" />
+    <End Role="TBLMesajlar" Type="Self.TBLMesajlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLFirmalar">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBLMesajlar">
+        <PropertyRef Name="Alici" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TBLPersonel_TBLdepartmanlar">
     <End Role="TBLdepartmanlar" Type="Self.TBLdepartmanlar" Multiplicity="0..1" />
     <End Role="TBLPersonel" Type="Self.TBLPersonel" Multiplicity="*" />
@@ -198,6 +223,14 @@
     <AssociationSet Name="FK_TBLGorevler_TBLPersonel1" Association="Self.FK_TBLGorevler_TBLPersonel1">
       <End Role="TBLPersonel" EntitySet="TBLPersonel" />
       <End Role="TBLGorevler" EntitySet="TBLGorevler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBLMesajlar_TBLFirmalar" Association="Self.FK_TBLMesajlar_TBLFirmalar">
+      <End Role="TBLFirmalar" EntitySet="TBLFirmalar" />
+      <End Role="TBLMesajlar" EntitySet="TBLMesajlar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBLMesajlar_TBLFirmalar1" Association="Self.FK_TBLMesajlar_TBLFirmalar1">
+      <End Role="TBLFirmalar" EntitySet="TBLFirmalar" />
+      <End Role="TBLMesajlar" EntitySet="TBLMesajlar" />
     </AssociationSet>
     <AssociationSet Name="FK_TBLPersonel_TBLdepartmanlar" Association="Self.FK_TBLPersonel_TBLdepartmanlar">
       <End Role="TBLdepartmanlar" EntitySet="TBLdepartmanlar" />

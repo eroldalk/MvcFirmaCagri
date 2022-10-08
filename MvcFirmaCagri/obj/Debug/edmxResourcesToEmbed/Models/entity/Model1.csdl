@@ -44,6 +44,9 @@
     <Property Name="Adres" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="TBLCagrilar" Relationship="Self.FK_TBLCagrilar_TBLFirmalar" FromRole="TBLFirmalar" ToRole="TBLCagrilar" />
     <Property Name="Sifre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="foto" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TBLMesajlar" Relationship="DbisTakipModel.FK_TBLMesajlar_TBLFirmalar" FromRole="TBLFirmalar" ToRole="TBLMesajlar" />
+    <NavigationProperty Name="TBLMesajlar1" Relationship="DbisTakipModel.FK_TBLMesajlar_TBLFirmalar1" FromRole="TBLFirmalar" ToRole="TBLMesajlar" />
   </EntityType>
   <EntityType Name="TBLGorevDetaylar">
     <Key>
@@ -180,6 +183,14 @@
       <End Role="TBLCagriDetay" EntitySet="TBLCagriDetay" />
     </AssociationSet>
     <EntitySet Name="TBLMesajlar" EntityType="DbisTakipModel.TBLMesajlar" />
+    <AssociationSet Name="FK_TBLMesajlar_TBLFirmalar" Association="DbisTakipModel.FK_TBLMesajlar_TBLFirmalar">
+      <End Role="TBLFirmalar" EntitySet="TBLFirmalar" />
+      <End Role="TBLMesajlar" EntitySet="TBLMesajlar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBLMesajlar_TBLFirmalar1" Association="DbisTakipModel.FK_TBLMesajlar_TBLFirmalar1">
+      <End Role="TBLFirmalar" EntitySet="TBLFirmalar" />
+      <End Role="TBLMesajlar" EntitySet="TBLMesajlar" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="TBLCagriDetay">
     <Key>
@@ -209,11 +220,37 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Gonderen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Alici" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Gonderen" Type="Int32" />
+    <Property Name="Alici" Type="Int32" />
     <Property Name="Konu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Mesaj" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Tarih" Type="DateTime" Precision="0" />
+    <Property Name="Tarih" Type="DateTime" Precision="0" Nullable="false" />
     <Property Name="Durum" Type="Boolean" />
+    <NavigationProperty Name="TBLFirmalar" Relationship="DbisTakipModel.FK_TBLMesajlar_TBLFirmalar" FromRole="TBLMesajlar" ToRole="TBLFirmalar" />
+    <NavigationProperty Name="TBLFirmalar1" Relationship="DbisTakipModel.FK_TBLMesajlar_TBLFirmalar1" FromRole="TBLMesajlar" ToRole="TBLFirmalar" />
   </EntityType>
+  <Association Name="FK_TBLMesajlar_TBLFirmalar">
+    <End Type="DbisTakipModel.TBLFirmalar" Role="TBLFirmalar" Multiplicity="0..1" />
+    <End Type="DbisTakipModel.TBLMesajlar" Role="TBLMesajlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLFirmalar">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBLMesajlar">
+        <PropertyRef Name="Gonderen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBLMesajlar_TBLFirmalar1">
+    <End Type="DbisTakipModel.TBLFirmalar" Role="TBLFirmalar" Multiplicity="0..1" />
+    <End Type="DbisTakipModel.TBLMesajlar" Role="TBLMesajlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLFirmalar">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBLMesajlar">
+        <PropertyRef Name="Alici" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
