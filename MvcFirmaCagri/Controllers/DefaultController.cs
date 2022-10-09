@@ -24,12 +24,15 @@ namespace MvcFirmaCagri.Controllers
             var pasifcagri = db.TBLCagrilar.Where(x => x.CagriFirma == id && x.Durum == false).Count();
             var yetkili = db.TBLFirmalar.Where(x => x.ID == id).Select(y => y.Yetkili).FirstOrDefault();
             var sektor = db.TBLFirmalar.Where(x => x.ID == id).Select(y => y.Sektor).FirstOrDefault();
+            var firmadi = db.TBLFirmalar.Where(x => x.ID == id).Select(y => y.Ad).FirstOrDefault();
+            var foto = db.TBLFirmalar.Where(x => x.ID == id).Select(y => y.foto).FirstOrDefault();
             ViewBag.c1 = toplamcagri;
             ViewBag.c2 = aktifcagri;
             ViewBag.c3 = pasifcagri;
             ViewBag.c4 = yetkili;
             ViewBag.c5 = sektor;
-            return View();
+            ViewBag.c6 = firmadi;
+            ViewBag.c7 = foto;            return View();
         }
         DbisTakipEntities db = new DbisTakipEntities();
 
@@ -100,8 +103,9 @@ namespace MvcFirmaCagri.Controllers
         public PartialViewResult partial1()
         {
             var mail = (string)Session["Mail"];
-            var mesajlar = db.TBLMesajlar.Where(x => x.Alici == 1 && x.Durum == true).ToList();
-            var mesajsayisi = db.TBLMesajlar.Where(x => x.Alici == 1 && x.Durum == true).Count();
+            var id = db.TBLFirmalar.Where(x => x.Mail == mail).Select(y => y.ID).FirstOrDefault();
+            var mesajlar = db.TBLMesajlar.Where(x => x.Alici == id && x.Durum == true).ToList();
+            var mesajsayisi = db.TBLMesajlar.Where(x => x.Alici == id && x.Durum == true).Count();
             ViewBag.m1 = mesajsayisi;
             return PartialView(mesajlar);
         }
@@ -127,7 +131,18 @@ namespace MvcFirmaCagri.Controllers
         }
 
 
+        public PartialViewResult partial3()
+        {
+           
 
+            return PartialView();
+        }
+        public PartialViewResult partial4()
+        {
+
+
+            return PartialView();
+        }
 
 
 

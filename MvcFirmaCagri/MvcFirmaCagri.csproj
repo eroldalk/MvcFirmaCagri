@@ -558,6 +558,8 @@
     <Content Include="web3\starter\assets\fonts\FontAwesome.otf" />
     <Content Include="Views\Default\partial1.cshtml" />
     <Content Include="Views\Default\partial2.cshtml" />
+    <Content Include="Views\Default\partial3.cshtml" />
+    <Content Include="Views\Default\partial4.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
